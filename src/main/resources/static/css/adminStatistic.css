@@ -1,0 +1,16 @@
+.table-container {
+    width: 100%;
+    height:380px;
+    margin: 20px 0;
+}
+
+
+
+.seatRateTitle{
+    text-align:center;
+}
+
+#dateChooseBtn,#paramChooseBtn{
+    display: block;
+    margin:0 auto;
+}

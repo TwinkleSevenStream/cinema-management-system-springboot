@@ -1,0 +1,210 @@
+<!--在JS文件里，这里啥都没有，请回。-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>影院管理</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/cinemaHall.css"/>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/request.js"></script>
+    <script src="/js/adminCinemaManage.js"></script>
+    <script src="/js/util.js"></script>
+    <script>
+        function add(){
+            var hallname= $('#hall-name-input').val();
+            var col= $("#hall-column-input").val();
+            var rown= $("#hall-row-input").val();
+            if(hallname.length!=0&&rown.length!=0&&col.length!=0){
+                getRequest(
+                    '/hall/add/'+hallname+"/"+col+"/"+rown,
+                    function (res) {
+                        if(res.success){
+                            alert("新增成功！");
+                            $("#hallModal").modal("hide");
+                            location.reload();
+                        } else {
+                            if (res.message=="e"){
+                                alert("该影厅名已存在，请重试！")
+                            }
+                            else {
+                                alert("err");
+                            }
+                        }
+                    },
+                    function (error) {
+                        alert(JSON.stringify(error));
+                    }
+                );
+            }else {
+                alert("输入不合法，请重新输入！");
+            }
+        }
+    </script>
+    <script>
+        function update(){
+            var ind=$('#hall-ind-input').val();
+            var hallname= $('#hall-name-update').val();
+            var col= $("#hall-column-update").val();
+            var rown= $("#hall-row-update").val();
+            if(ind.length!=0&&hallname.length!=0&&rown.length!=0&&col.length!=0){
+                getRequest(
+                    "/hall/update/"+ind+"/"+hallname+"/"+col+"/"+rown,
+                    function (res) {
+                        if(res.success){
+                            alert("修改成功！");
+                            $("#hallUpdateModal").modal("hide");
+                            location.reload();
+                        }
+                        else {
+                            if (res.message=="e"){
+                                alert("该影厅名已存在，请重试！")
+                            }
+                            else {
+                                alert("err");
+                            }
+                        }
+                    },
+                    function (error) {
+                        alert(JSON.stringify(error));
+                    }
+                );
+                // alert();
+            }else {
+                alert("输入不合法，请重新输入！");
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="main-container">
+    <div class="nav-left-container">
+        <div class="nav-user-container" style="margin-bottom: 50px;">
+            <img class="avatar-lg" src="/images/defaultAvatar.jpg" />
+            <p class="title" id="adminName">Admin</p>
+        </div>
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
+            <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
+            <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
+            <li role="presentation" class="active"><a href="#"><i class="icon-cogs"></i> 影院管理</a></li>
+            <li role="presentation"><a href="/admin/cinema/statistic"><i class="icon-bar-chart"></i> 影院统计</a></li>
+
+            <!--阶段三加的 edwin:-->
+            <li role="presentation"><a href="/admin/vip/management"><i class="icon-credit-card"></i>会员卡管理</a></li>
+            <li role="presentation"><a href="/admin/ticket/refundStrategyManage"><i class="icon-barcode"></i>票务管理</a></li>
+            <li role="presentation"><a href="/admin/user/management"><i class="icon-user"></i>用户管理</a></li>
+
+        </ul>
+    </div>
+
+    <div class="content-container">
+        <div class="content-item">
+            <span class="title gray-text">常规设置</span>
+            <div class="content-card card">
+                <span class="">用户可见排片日期：</span><span id="can-see-num"></span>
+                <a style="margin-left: 20px;" class="primary-text" id="canview-modify-btn">修改</a>
+                <input type="number" class="form-control" id="canview-set-input" style="display: none;width: 200px;">
+                <a style="display: none" class="primary-text" id="canview-confirm-btn">确认</a>
+            </div>
+        </div>
+        <div class="content-item">
+            <span class="title gray-text">影厅管理</span>
+            <a style="margin-left: 20px;" id="addNewHall"  data-backdrop="static" data-toggle="modal" data-target="#hallModal">新增</a>
+            <a style="margin-left: 20px;" id="updateOldHall"  data-backdrop="static" data-toggle="modal" data-target="#hallUpdateModal">修改</a>
+
+            <div class="content-card card" id="hall-card">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="hallModal" tabindex="-1" role="dialog" aria-labelledby="hallModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="hallModalLabel">新增影厅</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-name-input"><span class="error-text">*</span>影厅名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="hall-name-input" placeholder="请输入影厅名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-column-input"><span class="error-text">*</span>列数</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="hall-column-input" placeholder="请输入影厅行数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-row-input"><span class="error-text">*</span>行数</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="hall-row-input" placeholder="请输入影厅列数">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <!--                <button type="button" class="btn btn-primary" id="hall-btn"  onclick="f()">确认</button>-->
+                <button type="button" class="btn btn-primary" id="hall-btn2"  onclick="add()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="hallUpdateModal" tabindex="-1" role="dialog" aria-labelledby="hallUpdateModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="hallUpdateModalLabel">修改影厅</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-ind-input"><span class="error-text">*</span>影厅序</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="hall-ind-input" placeholder="请输入所需修改的影厅序">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-name-update"><span class="error-text">*</span>影厅名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="hall-name-update" placeholder="请输入修改后影厅名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-column-update"><span class="error-text">*</span>列数</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="hall-column-update" placeholder="请输入修改后影厅行数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hall-row-update"><span class="error-text">*</span>行数</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="hall-row-update" placeholder="请输入修改后影厅列数">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="hall-btn3"  onclick="update()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

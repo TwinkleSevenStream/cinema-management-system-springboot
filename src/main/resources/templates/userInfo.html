@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <!-- Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+    <!-- font-asesome图标库 -->
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
+
+    <!-- 引入css样式文件 -->
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/userInfo.css"/>
+
+    <!--<link rel="stylesheet" type="text/css" href="/css/adminVipManage.css"/>-->
+
+    <!-- 引入js脚本文件 -->
+    <!-- jquery -->
+    <script src="/js/jquery.js"></script>
+    <!-- Bootstrap 核心 JavaScript 文件 -->
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/request.js"></script>
+    <script src="/js/userInfo.js"></script>
+
+</head>
+<body>
+<div class="nav-top-container">
+    <div class="nav-logo title">NJU-Se电影购票系统</div>
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="#">首页</a></li>
+        <li role="presentation"><a href="/user/movie">电影</a></li>
+    </ul>
+    <div class="btn-group">
+        <button class="nav-user-container btn dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="avatar-sm" src="/images/defaultAvatar.jpg" />
+            <span class="gray-text" style="vertical-align: middle"><span  id="username"></span><span class="caret"></span></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="/user/buy">电影票</a></li>
+            <li><a href="/user/member">卡包</a></li>
+            <li><a href="/user/history">历史</a></li>
+            <li><a href="#">个人信息</a></li>
+            <li id="logout"><a href="#">登出</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="title">个人信息</div>
+<div class="main">
+    <div class="username">用户名：<span id="un"></span>&nbsp;&nbsp;&nbsp;<a id="unChange" data-backdrop="static" data-toggle="modal" data-target='#usernameModal'>修改</a></div>
+    <div class="pw">密  码：******&nbsp;&nbsp;&nbsp;<a id="pwChange"  data-backdrop="static" data-toggle="modal" data-target='#pwModal'>修改</a></div>
+</div>
+
+
+
+
+<div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >修改用户名</h4>
+            </div>
+
+            <div class="modal-body" >
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="newName">输入新用户名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="newName" placeholder="请输入新用户名，长度大于4">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="ensure" onclick="nameUpdate()">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pwModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >修改密码</h4>
+            </div>
+
+            <div class="modal-body" >
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="oldPw">输入原密码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="oldPw" placeholder="请输入原用户名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="newPw">输入新密码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="newPw" placeholder="请输入新密码，长度至少为6">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="ensure2" onclick="pwUpdate()">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

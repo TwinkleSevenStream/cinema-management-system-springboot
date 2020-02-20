@@ -1,0 +1,25 @@
+.navH{
+    width: 230px;
+    margin:  0 auto;
+}
+
+td,th{
+    text-align: center;
+}
+.main{
+
+}
+
+#spendContent{
+    display: none;
+    /*width: 1000px;*/
+
+}
+
+#chargeContent{
+    display: block;
+    /*width: 1000px;*/
+}
+li{
+    cursor: pointer;
+}

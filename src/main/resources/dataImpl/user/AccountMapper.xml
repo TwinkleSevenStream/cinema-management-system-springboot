@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cinema.data.user.AccountMapper">
+    <insert id="createNewAccount" useGeneratedKeys="true" keyProperty="id">
+        insert into user(username,password,consumption)
+        values(#{username},#{password},0)
+    </insert>
+    <select id="getAccountByName" resultMap="User">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="getAdminAccountByName" resultMap="User">
+        select * from administrator where username=#{username}
+    </select>
+
+    <update id="updateName">
+        update user set username = #{name} where username = #{oldName}
+    </update>
+    <update id="updatePw">
+        update user set  password = #{pw} where username = #{name}
+    </update>
+    <update id="updateConsumptionById">
+        update user set  consumption = (#{consumption}+consumption) where id = #{id}
+    </update>
+
+    <select id="getAllUser" resultMap="UserVO">
+        select * from user
+    </select>
+
+    <select id="getAllAdmin" resultMap="UserVO">
+        select * from administrator
+    </select>
+
+
+    <insert id="insertIntoUser" useGeneratedKeys="true" keyProperty="id">
+        insert into user(username,password,consumption)
+        values(#{username},#{password},0)
+    </insert>
+
+    <insert id="insertIntoAdmin" useGeneratedKeys="true" keyProperty="id">
+        insert into  administrator(username,password)
+        values(#{username},#{password})
+    </insert>
+    
+    <delete id="delUserByName">
+        delete from user where username = #{username}
+    </delete>
+    <delete id="delUserByID">
+        delete from user where id = #{id}
+    </delete>
+
+    <delete id="delAdminByName">
+        delete from administrator where username = #{username}
+    </delete>
+    <delete id="delAdminByID">
+        delete from administrator where id = #{id}
+    </delete>
+
+    <resultMap id="User" type="com.example.cinema.po.User">
+    </resultMap>
+
+    <resultMap id="UserVO" type="com.example.cinema.vo.UserVO">
+        <result column="id" property="id"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="consumption" property="consumption"></result>
+    </resultMap>
+</mapper>
+
+
+
+
+

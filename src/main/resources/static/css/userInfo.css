@@ -1,0 +1,20 @@
+.main{
+    width: 400px;
+    height: 200px;
+    margin: 100px auto;
+    border: 1px green solid;
+}
+.title{
+    font-size:24px;
+    text-align:center;
+}
+.username,.pw{
+    width: 220px;
+    height: 100px;
+    margin: 0 auto;
+    font-size: 20px;
+    line-height: 100px;
+}
+.username span{
+    font-size: 20px;
+}

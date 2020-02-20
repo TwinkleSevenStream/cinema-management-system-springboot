@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>影院统计</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/adminStatistic.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/adminPromotion.css"/>
+
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/request.js"></script>
+    <script src="/js/echarts.js"></script>
+    <script src="/js/adminCinemaStatistic.js"></script>
+    <script src="/js/util.js"></script>
+
+</head>
+
+<body>
+<div class="main-container">
+    <div class="nav-left-container">
+        <div class="nav-user-container" style="margin-bottom: 50px;">
+            <img class="avatar-lg" src="/images/defaultAvatar.jpg" />
+            <p class="title" id="adminName">Admin</p>
+        </div>
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation"><a href="/admin/movie/manage"><i class="icon-film"></i> 电影管理</a></li>
+            <li role="presentation"><a href="/admin/session/manage"><i class="icon-calendar"></i> 排片管理</a></li>
+            <li role="presentation"><a href="/admin/promotion/manage"><i class="icon-gift"></i> 活动管理</a></li>
+            <li role="presentation"><a href="/admin/cinema/manage"><i class="icon-cogs"></i> 影院管理</a></li>
+            <li role="presentation"  class="active"><a href="#"><i class="icon-bar-chart"></i> 影院统计</a></li>
+
+            <li role="presentation"><a href="/admin/vip/management"><i class="icon-credit-card"></i>会员卡管理</a></li>
+            <li role="presentation"><a href="/admin/ticket/refundStrategyManage"><i class="icon-barcode"></i>票务管理</a></li>
+            <li role="presentation"><a href="/admin/user/management"><i class="icon-user"></i>用户管理</a></li>
+
+        </ul>
+    </div>
+    <div class="content-container">
+        <div class="content-header">
+            <span class="title gray-text">影院统计</span>
+        </div>
+        <div class="card table-container" id="schedule-rate-container"></div><hr>
+        <div class="card table-container" id="box-office-container"></div><hr>
+        <div class="card table-container" id="audience-price-container"></div><hr>
+
+        <div>
+            <!--这里默认是今天。-->
+            <div class="card table-container" id="place-rate-container"></div>
+            <button id="dateChooseBtn" type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#movieModal">选择其他日期</button>
+        </div><hr>
+
+        <div>
+            <div class="card table-container" id="popular-movie-container"></div>
+            <button id="paramChooseBtn" type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#popularMovieModal">修改</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="movieModalLabel">选择时间</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="movie-date-input"><span class="error-text">*</span>选择时间</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="movie-date-input" placeholder="请选择查看电影上座率的时间">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="resure-btn">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="popularMovieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="popularMovieModalLabel">修改参数</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="popularMovieNumDay"><span class="error-text">*</span>最近天数</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="popularMovieNumDay" placeholder="请输入最近天数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="popularMovieNum"><span class="error-text">*</span>最前数目</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="popularMovieNum" placeholder="请输入将展示的最受欢迎电影的数量">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="resure-btn2">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

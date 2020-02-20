@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/bootstrap.js"></script>
+    <style>
+        .cir{
+            border: 1px blue solid;
+            border-radius: 50%;
+        }
+    </style>
+    <script>
+        console.log(new Date())
+        console.log(new Date().toString())
+        console.log(new Date().toDateString())
+        console.log(new Date().toTimeString())
+        var d = new Date();
+        date = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); //这里month必须加一？？？
+        console.log(date)
+        alert(date)
+    </script>
+</head>
+<body>
+
+    <span class="icon-circle cir">1</span>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cinema.data.promotion.VIPCardMapper">
+    <!--<insert id="insertOneCard" parameterType="com.example.cinema.po.VIPCard"-->
+            <!--useGeneratedKeys="true" keyProperty="id">-->
+        <!--insert into vip_card(user_id,balance,endTime,vipTypeIndex,full,reduce)-->
+        <!--values(#{userId}, #{balance},#{endTime},#{vipTypeIndex},#{full},#{reduce})-->
+    <!--</insert>-->
+
+    <select id="selectCardById" resultMap="VIPCard">
+        select * from vip_card where id=#{id} limit 1
+    </select>
+
+    <select id="selectCardByUserId" resultMap="VIPCard">
+        select * from vip_card where user_id=#{userId} limit 1
+    </select>
+
+    <update id="updateCardBalance" >
+        update vip_card set balance = #{balance} where id=#{id}
+    </update>
+
+    <delete id="delete">
+        delete from vip_card where user_id = #{userId}
+    </delete>
+
+    <resultMap id="VIPCard" type="com.example.cinema.po.VIPCard">
+        <result column="join_time" property="joinDate"></result>
+        <result column="id" property="id"></result>
+        <result column="user_id" property="userId"></result>
+        <result column="balance" property="balance"></result>
+        <result column="endTime" property="endTime"></result>
+        <result column="vipTypeIndex" property="vipTypeIndex"></result>
+        <result column="full" property="full"></result>
+        <result column="reduce" property="reduce"></result>
+    </resultMap>
+</mapper>

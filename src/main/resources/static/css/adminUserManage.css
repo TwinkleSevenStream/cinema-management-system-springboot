@@ -1,0 +1,33 @@
+.navH{
+    width: 230px;
+    margin:  0 auto;
+}
+td,th{
+    text-align: center;
+}
+li{
+    cursor: pointer;
+}
+#userBox{
+    display: block;;
+}
+
+#adminBox{
+    display: none;
+}
+.opBtn{
+    display:block;
+    width:120px;
+    height:34px;
+    margin: 0 auto;
+}
+.opBtn button{
+    margin:0 auto;
+}
+
+#adminNav, #userNav{
+    margin: 0 auto;
+}
+.beCenter{
+    margin: 0 auto;
+}

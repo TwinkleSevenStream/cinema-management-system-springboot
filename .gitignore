@@ -1,0 +1,36 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+pom.xml
+sql/cinema.sql
+src/main/resources/application.yml
+src/main/resources/static/js/userBuy.js
+src/main/resources/application.yml
+src/main/java/com/example/cinema/bl/sales/TicketService.java
+知识补充.md
+碎碎念.md
+碎碎念2.md
+積累.md
+阶段3.md
+测试用例1
